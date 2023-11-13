@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"time"
@@ -31,9 +32,7 @@ func RequireAuth(c *gin.Context) {
 	})
 
 	if err != nil {
-		c.JSON(200, gin.H{
-			"error": err.Error(),
-		})
+		log.Fatal(err)
 	}
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok {
