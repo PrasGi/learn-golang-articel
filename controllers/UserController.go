@@ -91,6 +91,7 @@ func Login(c *gin.Context) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": user.ID,
 		"nbf": time.Now().Add(time.Hour * 24 * 30).Unix(),
+		"exp": time.Now().Add(time.Hour * 24 * 30).Add(time.Hour).Unix(), // Contoh: 31 hari kedepan
 	})
 
 	// Sign and get the complete encoded token as a string using the secret
